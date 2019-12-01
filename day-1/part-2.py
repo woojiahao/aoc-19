@@ -1,6 +1,6 @@
 def calculate_fuel(mass: int) -> int:
     total_fuel = 0
-    while mass > 0:
+    while True:
         mass = int(mass / 3) - 2
         if not mass > 0:
             break
