@@ -1,5 +1,5 @@
 fun opCode(data: List<Int>, counter: Int) =
-  data.toMutableList().apply {
+  data.modify {
     val opCode = data[counter]
     val a = data[data[counter + 1]]
     val b = data[data[counter + 2]]
@@ -10,7 +10,7 @@ fun opCode(data: List<Int>, counter: Int) =
       2 -> a * b
       else -> throw Exception("Cannot perform any operations in halting code")
     })
-  }.toList()
+  }
 
 fun solve(data: List<Int>, counter: Int): Int {
   val updatedData = opCode(data, counter)
