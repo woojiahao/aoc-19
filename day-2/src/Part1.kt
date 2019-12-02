@@ -4,11 +4,10 @@ fun opCode(data: List<Int>, counter: Int) =
     val a = data[data[counter + 1]]
     val b = data[data[counter + 2]]
     val c = data[counter + 3]
-    removeAt(c)
-    add(c, when (opCode) {
+    set(c, when (opCode) {
       1 -> a + b
       2 -> a * b
-      else -> throw Exception("Cannot perform any operations in halting code")
+      else -> throw Exception("Unknown op code")
     })
   }
 
