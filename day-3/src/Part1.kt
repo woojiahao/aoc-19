@@ -32,8 +32,17 @@ fun solve(t1: List<Travel>, t2: List<Travel>) = intersections(path(t1), path(t2)
 
 fun main() {
   val (t1, t2) = data()
-  val timeTaken = measureTimeMillis {
+  println("Answer: ${solve(t1, t2)}")
+
+  val rawTime = measureTimeMillis {
     println(solve(t1, t2))
   }
-  println(timeTaken)
+  println("Raw time: $rawTime")
+
+  val p1 = path(t1)
+  val p2 = path(t2)
+  val betterTime = measureTimeMillis {
+    intersections(p1, p2).map { manhattanDistance(it) }.min()!!
+  }
+  println("Better time: $betterTime")
 }
