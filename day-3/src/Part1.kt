@@ -8,10 +8,10 @@ fun manhattanDistance(i: Point) = abs(o.x - i.x) + abs(o.y - i.y)
 
 fun move(pos: Point, t: Travel) =
   when (t.direction) {
-    L -> (pos.x downTo (pos.x - t.distance)).map { it to pos.y }
-    R -> (pos.x..(pos.x + t.distance)).map { it to pos.y }
-    U -> (pos.y..(pos.y + t.distance)).map { pos.x to it }
-    D -> (pos.y downTo (pos.y - t.distance)).map { pos.x to it }
+    L -> (pos.x - 1 downTo (pos.x - t.distance)).map { it to pos.y }
+    R -> ((pos.x + 1)..(pos.x + t.distance)).map { it to pos.y }
+    U -> ((pos.y + 1)..(pos.y + t.distance)).map { pos.x to it }
+    D -> (pos.y - 1 downTo (pos.y - t.distance)).map { pos.x to it }
   }
 
 fun path(t: List<Travel>): List<Point> {
@@ -24,7 +24,6 @@ fun path(t: List<Travel>): List<Point> {
       }
     }
     .flatten()
-    .minus(0 to 0)
 }
 
 fun intersections(p1: List<Point>, p2: List<Point>) = p1.intersect(p2).toList()
