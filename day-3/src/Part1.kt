@@ -16,17 +16,20 @@ fun move(pos: Point, t: Travel) =
 
 fun path(t: List<Travel>): List<Point> {
   var cur = o.copy()
-  return t.map {
-    with(move(cur, it)) {
-      cur = last()
-      this
+  return t
+    .map {
+      with(move(cur, it)) {
+        cur = last()
+        this
+      }
     }
-  }.flatten()
+    .flatten()
+    .minus(0 to 0)
 }
 
-fun intersections(t1: List<Travel>, t2: List<Travel>) = path(t1).intersect(path(t2)).toList()
+fun intersections(p1: List<Point>, p2: List<Point>) = p1.intersect(p2).toList()
 
-fun solve(t1: List<Travel>, t2: List<Travel>) = intersections(t1, t2).map { manhattanDistance(it) }.min()!!
+fun solve(t1: List<Travel>, t2: List<Travel>) = intersections(path(t1), path(t2)).map { manhattanDistance(it) }.min()!!
 
 fun main() {
   val (t1, t2) = data()
