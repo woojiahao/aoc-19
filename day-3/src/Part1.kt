@@ -16,15 +16,12 @@ fun move(pos: Point, t: Travel) =
 
 fun path(t: List<Travel>): List<Point> {
   var cur = o.copy()
-  return mutableListOf<Point>().apply {
-    t.forEach {
-      with(move(cur, it)) {
-        addAll(this)
-        cur = last()
-      }
+  return t.map {
+    with(move(cur, it)) {
+      cur = last()
+      this
     }
-    remove(0 to 0)
-  }.toList()
+  }.flatten()
 }
 
 fun intersections(t1: List<Travel>, t2: List<Travel>) = path(t1).intersect(path(t2)).toList()
