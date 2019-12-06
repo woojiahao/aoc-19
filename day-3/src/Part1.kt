@@ -33,7 +33,8 @@ fun solve(t1: List<Travel>, t2: List<Travel>) = intersections(t1, t2).map { manh
 
 fun main() {
   val (t1, t2) = data()
-  measureTimeMillis {
+  val timeTaken = measureTimeMillis {
     println(solve(t1, t2))
   }
+  println(timeTaken)
 }
