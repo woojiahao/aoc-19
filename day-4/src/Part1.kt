@@ -1,6 +1,9 @@
-fun hasRepeating(i: Int): Boolean = i.toString().zipWithNext { a, b -> a.toInt() == b.toInt() }.any { it }
+fun pairInput(i: Int, predicate: (Int, Int) -> Boolean) =
+  i.toString().zipWithNext { a, b -> predicate(a.toInt(), b.toInt()) }
 
-fun isAscending(i: Int) = i.toString().zipWithNext { a, b -> a <= b }.all { it }
+fun hasRepeating(i: Int): Boolean = pairInput(i) { a, b -> a == b }.any { it }
+
+fun isAscending(i: Int) = pairInput(i) { a, b -> a <= b }.all { it }
 
 fun validate(i: Int) = hasRepeating(i) && isAscending(i)
 
