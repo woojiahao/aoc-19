@@ -5,6 +5,7 @@ You first start with an OpCode, potential values include `1`, `2`, `3`, `4` and 
 ### OpCodes
 #### OpCode 1
 (1, a, b, c)
+- Addition
 - a and b => positions of values to take 
 - c => position to store the results
     - Will replace whatever is there
