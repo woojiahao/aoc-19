@@ -5,6 +5,10 @@ enum class OpCode(val code: Int, val parameterCount: Int) {
   MULTIPLY(2, 3),
   INPUT(3, 1),
   OUTPUT(4, 1),
+  JUMP_IF_TRUE(5, 2),
+  JUMP_IF_FALSE(6, 2),
+  LESS_THAN(7, 3),
+  EQUALS(8, 3),
   HALT(99, 0);
 
   companion object {
