@@ -5,19 +5,37 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"time"
 )
 
+func part1Recursive(data []int, idx int) int {
+	cur := data[idx]
+	switch cur {
+	case 1:
+		sum, pos := data[data[idx+1]]+data[data[idx+2]], data[idx+3]
+		data[pos] = sum
+		idx += 4
+		return part1Recursive(data, idx)
+	case 2:
+		product, pos := data[data[idx+1]]*data[data[idx+2]], data[idx+3]
+		data[pos] = product
+		idx += 4
+		return part1Recursive(data, idx)
+	case 99:
+		return data[0]
+	default:
+		panic("invalid code")
+	}
+}
+
 func part1(data []int) int {
-	fmt.Println("Data is", data)
 	in := make([]int, len(data))
 	copy(in, data)
-	fmt.Println("in is", in)
 
 	idx, cur := 0, in[0]
 F:
 	for {
 		cur = in[idx]
-		fmt.Printf("idx: %d, cur: %d\n", idx, cur)
 		switch cur {
 		case 1:
 			sum, pos := in[in[idx+1]]+in[in[idx+2]], in[idx+3]
@@ -32,7 +50,6 @@ F:
 		default:
 			panic("Invalid code")
 		}
-		fmt.Println("data:", in)
 	}
 	return in[0]
 }
@@ -60,6 +77,12 @@ func readData() []int {
 
 func main() {
 	data := readData()
-	fmt.Println("Data is", data)
-	fmt.Println("Part 1", part1(data))
+	start := time.Now()
+
+	//fmt.Println("Part 1", part1(data))
+	fmt.Println("Part 1 recursive", part1Recursive(data, 0))
+
+	end := time.Now()
+	elapsed := end.Sub(start)
+	fmt.Printf("Took %dns to process", elapsed.Nanoseconds())
 }
